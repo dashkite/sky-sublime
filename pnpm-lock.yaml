@@ -33,6 +33,9 @@ importers:
       '@dashkite/genie-coffee':
         specifier: link:../genie-coffee
         version: link:../genie-coffee
+      '@dashkite/genie-module':
+        specifier: ^0.5.1
+        version: 0.5.1
       '@dashkite/genie-yaml':
         specifier: link:../genie-yaml
         version: link:../genie-yaml
@@ -53,6 +56,9 @@ packages:
 
   '@dashkite/assert@0.1.4':
     resolution: {integrity: sha512-OLOzI/lA+EwCh6znSexGAG1V4bkaT5gU04xl6ApEluv5jICnHhinZ707MObu+jhVVJ9uHDDlG85O+Afn1aTQoQ==}
+
+  '@dashkite/genie-module@0.5.1':
+    resolution: {integrity: sha512-NoP35yTPVsL0v8bLlIIo6VZ9rB7codDaOF7TkrOG6vGkK9B3Z9b1VNX5RCqdMvgg5YVmk7hk1UOxj3E62aoHIg==}
 
   '@dashkite/joy@0.3.16':
     resolution: {integrity: sha512-dsU0us4j1Pb+zceoBvLbnZ2PbmULkJUtM2vtWLxKmoc1DE4w9SVTiPTe6JWvF0A0vk90ldv+Lc9qEA5x3O+DtQ==}
@@ -368,6 +374,8 @@ snapshots:
   '@dashkite/assert@0.1.4':
     dependencies:
       '@dashkite/joy': 0.3.16
+
+  '@dashkite/genie-module@0.5.1': {}
 
   '@dashkite/joy@0.3.16': {}
 
