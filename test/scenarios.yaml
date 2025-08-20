@@ -22,5 +22,23 @@
         method: put
       rejects: "sublime: method not allowed"
 
+- name: Sky Response
+  scenarios:
+    - name: simple response
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        status: 200
+        content: "Hello Dan"
+      assertions:
+        - path: $.status
+          type: equal
+          expect: 200
+
+
+
 
 

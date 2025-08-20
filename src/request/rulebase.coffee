@@ -1,17 +1,43 @@
 import Scout from "@dashkite/scout"
+import Rulebase from "@dashkite/athena"
 
-rulebase = ->
+rulebase = Rulebase.make
 
-  if @input.resource?
+  clone: ( state ) -> state.clone()
+     
+rulebase.conditions
 
-    api = await Scout.discover @input.resource.origin
+  "has resource": -> @input.resource?
 
-    target = Scout.encode @input.resource, api
-    @output.url = ( new URL target, api.origin ).toString()
+  "api ready": -> @api?
 
-    if @output.method?
-      method = Scout.method [ @input.resource.name, @output.method ], api
-      if !method?
-        throw new Error "sublime: method not allowed"
+  "method ready": -> @output.method?
+
+  "method not allowed": ->
+    !( Scout.method [ @input.resource.name, @output.method ], @api )?
+
+rulebase.actions
+
+  "load api": ->
+    @api ?= await Scout.discover @input.resource.origin
+
+  "set url": ->
+    target = Scout.encode @input.resource, @api
+    @output.url = ( new URL target, @api.origin ).toString()
+
+  "throw method not allowed": ->
+    @throw new Error "sublime: method not allowed"
+
+rulebase.rules
+
+  "load api": [ "!api ready" ]
+
+  "set url": [ "has resource" ]
+
+  "throw method not allowed": [
+    "api ready"
+    "method ready"
+    "method not allowed"
+  ]
 
 export default rulebase

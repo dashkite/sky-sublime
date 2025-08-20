@@ -40,4 +40,10 @@ do ->
                 .make input
                 .get()
 
+          "Sky Response":
+            "*": ({ input }) ->
+              Sky.Response
+                .make input
+                .get()
+
   process.exit if success then 0 else 1
