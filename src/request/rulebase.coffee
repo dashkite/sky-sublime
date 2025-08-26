@@ -30,7 +30,7 @@ rulebase.actions
 
 rulebase.rules
 
-  "load api": [ "!api ready" ]
+  "load api": [ "has resource", "!api ready" ]
 
   "set url": [ "has resource" ]
 
