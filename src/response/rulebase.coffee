@@ -1,24 +1,19 @@
 import Scout from "@dashkite/scout"
-import Request from "../request/builder"
-import Rulebase from "@dashkite/athena"
+import Athena from "@dashkite/athena"
+import State from "@dashkite/sublime/state"
 
-rulebase = Rulebase.make
+rulebase = Athena.make
+
+  initialize: ( state ) -> State.make state
 
   clone: ( state ) -> state.clone()
 
-rulebase.conditions
+  equal: ( a, b ) -> a.equal b
+          
+rulebase.conditions {}
 
-  "has request": -> @input.request?
+rulebase.actions {}
 
-rulebase.actions
-
-  "set request": ->
-    @output.request = await Request
-      .make @input.request
-      .get()
-
-rulebase.rules
-
-  "set request": [ "has request" ]
+rulebase.rules {}
 
 export default rulebase

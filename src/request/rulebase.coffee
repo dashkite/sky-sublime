@@ -1,29 +1,34 @@
 import Scout from "@dashkite/scout"
-import Rulebase from "@dashkite/athena"
+import Athena from "@dashkite/athena"
+import State from "@dashkite/sublime/state"
 
-rulebase = Rulebase.make
+rulebase = Athena.make
+
+  initialize: ( state ) -> State.make state
 
   clone: ( state ) -> state.clone()
+
+  equal: ( a, b ) -> a.equal b
      
 rulebase.conditions
 
   "has resource": -> @input.resource?
 
-  "api ready": -> @api?
+  "api ready": -> @_.api?
 
   "method ready": -> @output.method?
 
   "method not allowed": ->
-    !( Scout.method [ @input.resource.name, @output.method ], @api )?
+    !( Scout.method [ @input.resource.name, @output.method ], @_.api )?
 
 rulebase.actions
 
   "load api": ->
-    @api ?= await Scout.discover @input.resource.origin
+    @_.api ?= await Scout.discover @input.resource.origin
 
   "set url": ->
-    target = Scout.encode @input.resource, @api
-    @output.url = ( new URL target, @api.origin ).toString()
+    target = Scout.encode @input.resource, @_.api
+    @output.url = ( new URL target, @_.api.origin ).toString()
 
   "throw method not allowed": ->
     @throw new Error "sublime: method not allowed"

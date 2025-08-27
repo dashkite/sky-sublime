@@ -1,4 +1,4 @@
-import { Request } from "@dashkite/sublime"
+import Request from "@dashkite/sublime/request"
 
 import rulebase from "./rulebase"
 
