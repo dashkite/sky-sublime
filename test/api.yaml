@@ -7,3 +7,6 @@ resources:
         response:
           content-type: [ application/json ]
           status: [ 200 ]
+      put:
+        request:
+          content-type: [ application/json ]

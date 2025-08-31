@@ -19,8 +19,23 @@
           name: hello
           bindings:
             name: dan
-        method: put
+        method: delete
       rejects: "sublime: method not allowed"
+
+    - name: set content type
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        method: put
+        content:
+          greeting: Hello, Dan
+      assertions:
+        - path: ( $.headers.get "content-type" ).format()
+          type: equal
+          expect: application/json
 
 - name: Sky Response
   scenarios:

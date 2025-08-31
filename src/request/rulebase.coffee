@@ -14,6 +14,8 @@ rulebase.conditions
 
   "has resource": -> @input.resource?
 
+  "has content-type": -> ( @working.headers?.get "content-type" )?
+
   "api ready": -> @_.api?
 
   "method ready": -> @output.method?

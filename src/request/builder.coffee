@@ -1,9 +1,10 @@
 import Request from "@dashkite/sublime/request"
 
+import content from "../content"
 import rulebase from "./rulebase"
 
 class Builder extends Request
 
-  @rulebase rulebase
+  @rulebases [ rulebase, content ]
 
 export default Builder
