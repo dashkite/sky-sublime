@@ -35,7 +35,7 @@
   "devDependencies": {
     "@dashkite/amen": "^0.9.9",
     "@dashkite/amen-console": "^0.8.9",
-    "@dashkite/assert": "^0.7.15",
+    "@dashkite/assert": "link:../assert",
     "@dashkite/genie": "^0.20.13",
     "@dashkite/genie-clean": "^0.13.11",
     "@dashkite/genie-coffee": "^0.13.13",
@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@dashkite/athena": "link:../athena",
+    "@dashkite/media-type": "link:../media-type",
     "@dashkite/reactive": "link:../reactive",
     "@dashkite/scout": "^0.8.14",
     "@dashkite/sublime": "link:../sublime"

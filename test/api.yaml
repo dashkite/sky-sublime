@@ -5,8 +5,11 @@ resources:
     methods:
       get:
         response:
-          content-type: [ application/json ]
+          content-type: [ application/vnd.dashkite.greeting+json;version=1 ]
           status: [ 200 ]
       put:
         request:
-          content-type: [ application/json ]
+          content-type: [ application/vnd.dashkite.greeting+json;version=1 ]
+        response:
+          content-type: [ application/vnd.dashkite.greeting+json;version=1 ]
+          status: [ 200 ]

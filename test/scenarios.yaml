@@ -35,7 +35,21 @@
       assertions:
         - path: ( $.headers.get "content-type" ).format()
           type: equal
-          expect: application/json
+          expect: application/vnd.dashkite.greeting+json; version=1
+
+    - name: unsupported content-type
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        method: put
+        headers:
+          content-type: application/json
+        content:
+          greeting: Hello, Dan
+      rejects: "sublime: unsupported content-type"
 
 - name: Sky Response
   scenarios:
@@ -53,7 +67,36 @@
           type: equal
           expect: 200
 
+    - name: set content type
+      input:
+        request:
+          resource:
+            origin: "http://localhost:3000"
+            name: hello
+            bindings:
+              name: dan
+          method: get
+        content:
+          greeting: Hello, Dan
+      assertions:
+        - path: ( $.headers.get "content-type" ).format()
+          type: equal
+          expect: application/vnd.dashkite.greeting+json; version=1
 
+    - name: unacceptable response
+      input:
+        request:
+          resource:
+            origin: "http://localhost:3000"
+            name: hello
+            bindings:
+              name: dan
+          method: put
+        headers:
+          content-type: application/json
+        content:
+          greeting: Hello, Dan
+      rejects: "sublime: unacceptable response"
 
 
 
