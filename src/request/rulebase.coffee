@@ -38,7 +38,7 @@ rulebase.conditions
     ], @_.api
     ! Accept
        .make types
-       .supported @working.headers.get "content-type"
+       .supported @working.headers.get "content-type"    
 
 rulebase.actions
 
