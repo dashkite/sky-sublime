@@ -4,7 +4,11 @@ import print from "@dashkite/amen-console"
 import Runner from "@dashkite/runner"
 import express from "express"
 
+import Sierra from "@dashkite/sierra"
+import Registry from "@dashkite/registry"
+
 import * as Sky from "../src"
+import Locator from "../src/locator"
 
 import scenarios from "./scenarios"
 
@@ -28,12 +32,24 @@ do ->
 
     await do ->
 
+      authorizers = Sierra.make()
+      authorizers.add "foo", 
+        matches: -> true
+        get: -> 
+          scheme: "foo"
+          token: "123"
+      await Registry.set "authorizers", authorizers
+
       Runner
 
         .make scenarios
 
         .apply
 
+          "Sky Locator": 
+            "*": ({ input }) ->
+              Locator.decode input
+              
           "Sky Request":
             "*": ({ input }) ->
               Sky.Request

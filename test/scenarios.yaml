@@ -1,3 +1,21 @@
+- name: Sky Locator
+  scenarios:
+    - name: simple locator
+      input: "http://localhost:3000/hello/dolly"
+      assertions:
+        - path: $.origin
+          type: equal
+          expect: "http://localhost:3000"
+        - path: $.domain
+          type: equal
+          expect: localhost
+        - path: $.name
+          type: equal
+          expect: hello
+        - path: $.bindings.name
+          type: equal
+          expect: dolly
+
 - name: Sky Request
   scenarios:
     - name: simple request
@@ -36,6 +54,52 @@
         - path: ( $.headers.get "content-type" ).format()
           type: equal
           expect: application/vnd.dashkite.greeting+json; version=1
+
+    - name: set authorization header
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        method: put
+        content:
+          greeting: Hello, Dan
+      assertions:
+        - path: ( $.headers.get "authorization" )
+          type: deepEqual
+          expect:
+            scheme: foo
+            token: "123"
+
+    - name: unsupported authorization specifier
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        method: put
+        content:
+          greeting: Hello, Dan
+        authorization:
+          - challenge:
+              scheme: bar
+      rejects: "sublime: unsupported authorization specifier"
+
+    - name: unsupported authorization header
+      input:
+        resource:
+          origin: "http://localhost:3000"
+          name: hello
+          bindings:
+            name: dan
+        method: put
+        content:
+          greeting: Hello, Dan
+        headers:
+          authorization: bar 456
+      rejects: "sublime: unsupported authorization header"
 
     - name: unsupported content-type
       input:

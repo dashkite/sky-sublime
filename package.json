@@ -29,6 +29,10 @@
     "./response": {
       "browser": "./build/browser/src/response/index.js",
       "node": "./build/node/src/response/index.js"
+    },
+    "./locator": {
+      "browser": "./build/browser/src/locator/index.js",
+      "node": "./build/node/src/locator/index.js"
     }
   },
   "main": "build/node/src/index.js",
@@ -49,14 +53,17 @@
     "@dashkite/genie-coffee": "^0.13.13",
     "@dashkite/genie-module": "^0.5.40",
     "@dashkite/genie-yaml": "^0.11.12",
+    "@dashkite/registry": "^0.17.10",
     "@dashkite/runner": "^0.1.0",
+    "@dashkite/sierra": "link:../sierra",
     "express": "^5.1.0"
   },
   "dependencies": {
     "@dashkite/athena": "link:../athena",
     "@dashkite/media-type": "link:../media-type",
     "@dashkite/reactive": "link:../reactive",
-    "@dashkite/scout": "^0.8.14",
-    "@dashkite/sublime": "link:../sublime"
+    "@dashkite/scout": "link:../scout",
+    "@dashkite/sublime": "link:../sublime",
+    "asert": "link:../asert"
   }
 }

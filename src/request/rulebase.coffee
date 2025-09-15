@@ -30,6 +30,31 @@ rulebase.conditions
   "method not allowed": ->
     !( Scout.method [ @input.resource.name, @output.method ], @_.api )?
 
+  "has authorization specifier": ->
+    @input.authorization?
+
+  "authorization specifier ready": ->
+    @working.authorization?
+
+  "authorization header ready": ->
+    ( @working.headers?.get "authorization" )?
+
+  "supported authorization specifier": do ({ schemes } = {}) ->
+    schemes = ( specifiers ) ->
+      new Set specifiers.map ( specifier ) -> 
+        specifier.challenge.scheme
+    ->
+      specified = schemes @input.authorization
+      supported = schemes @working.authorization
+      ( supported.intersection specified ).size > 0
+
+  "supported authorization header": ->
+    authorization = @working.headers.get "authorization"
+    @working
+      .authorization
+      .some ( specifier ) -> 
+        specifier?.challenge?.scheme == authorization.scheme 
+
   "unsupported content-type": ->
     types = Scout.types [ 
       @input.resource.name
@@ -71,10 +96,38 @@ rulebase.actions
       @working.headers.set "accept", Accept.make types
       @output.headers = @working.headers.data
 
+  "set authorization specifiers": ->
+    schemes = Scout.authorization [
+      @input.resource.name
+      @output.method
+    ], @_.api
+    if schemes?
+      @working.authorization =
+        schemes.map ( scheme ) -> challenge: { scheme }
+
+  "throw missing authorization header": ->
+    @throw new Error "sublime: missing authorization header"
+
+  "throw unsupported authorization specifier": ->
+    @throw new Error "sublime: unsupported authorization specifier"
+
+  "throw unsupported authorization header": ->
+    @throw new Error "sublime: unsupported authorization header"
+    
   "throw unsupported content-type": ->
     @throw new Error "sublime: unsupported content-type"
 
 rulebase.rules
+
+  "supported authorization specifier": [
+    "has authorization specifier"
+    "authorization specifier ready"
+  ]
+
+  "supported authorization header": [
+    "authorization specifier ready"
+    "authorization header ready"
+  ]
 
   "load api": [ "has resource", "!api ready" ]
 
@@ -99,6 +152,12 @@ rulebase.rules
     "api ready"
   ]
 
+  "set authorization specifiers": [ 
+    "!authorization specifier ready"
+    "method ready"
+    "api ready" 
+  ]    
+
   "unsupported content-type": [
     "method ready"
     "api ready"
@@ -108,5 +167,19 @@ rulebase.rules
   "throw unsupported content-type": [
     "unsupported content-type"
   ]
+
+  "throw unsupported authorization specifier": [
+    "!supported authorization specifier"
+  ]
+
+  "throw missing authorization header": [
+    "authorization specifier ready"
+    "!authorization header ready"
+  ]
+
+  "throw unsupported authorization header": [
+    "!supported authorization header"
+  ]
+
 
 export default rulebase
