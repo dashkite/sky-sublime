@@ -42,7 +42,8 @@
   ],
   "scripts": {
     "test": "genie test",
-    "build": "genie build"
+    "build": "genie build",
+    "release": "genie release"
   },
   "devDependencies": {
     "@dashkite/amen": "^0.9.9",
@@ -52,6 +53,7 @@
     "@dashkite/genie-clean": "^0.13.11",
     "@dashkite/genie-coffee": "^0.13.13",
     "@dashkite/genie-module": "^0.5.40",
+    "@dashkite/genie-release": "^0.5.0",
     "@dashkite/genie-yaml": "^0.11.12",
     "@dashkite/registry": "^0.17.10",
     "@dashkite/runner": "^0.1.0",
