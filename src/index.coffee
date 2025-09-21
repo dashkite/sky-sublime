@@ -1,4 +1,4 @@
-import Request from "./request"
-import Response from "./response"
+import request from "./request"
+import response from "./response"
 
-export { Request, Response }
+export default { request, response }

@@ -149,13 +149,19 @@
 
     - name: unacceptable response
       input:
+      
         request:
+          authorization:
+            - challenge:
+                scheme: bar      
           resource:
             origin: "http://localhost:3000"
             name: hello
             bindings:
               name: dan
           method: put
+          content:
+            greeting: Hello, Dan
         headers:
           content-type: application/json
         content:

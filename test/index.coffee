@@ -6,8 +6,9 @@ import express from "express"
 
 import Sierra from "@dashkite/sierra"
 import Registry from "@dashkite/registry"
+import Sublime from "@dashkite/sublime"
 
-import * as Sky from "../src"
+import sky from "../src"
 import Locator from "../src/locator"
 
 import scenarios from "./scenarios"
@@ -40,6 +41,8 @@ do ->
           token: "123"
       await Registry.set "authorizers", authorizers
 
+      { Request, Response } = Sublime.make [ sky ]
+
       Runner
 
         .make scenarios
@@ -52,13 +55,13 @@ do ->
               
           "Sky Request":
             "*": ({ input }) ->
-              Sky.Request
+              Request.Builder
                 .make input
                 .get()
 
           "Sky Response":
             "*": ({ input }) ->
-              Sky.Response
+              Response.Builder
                 .make input
                 .get()
 
