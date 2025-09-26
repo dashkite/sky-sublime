@@ -61,7 +61,7 @@
     "express": "^5.1.0"
   },
   "dependencies": {
-    "@dashkite/athena": "^0.0.2",
+    "@dashkite/athena": "link:../athena",
     "@dashkite/media-type": "^0.9.0",
     "@dashkite/reactive": "^0.7.19",
     "@dashkite/scout": "^0.8.17",

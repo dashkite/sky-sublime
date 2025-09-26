@@ -5,7 +5,7 @@ import State from "@dashkite/sublime/state"
 
 # TODO check for expected response status
 
-rulebase = Athena.make
+rules = Athena.make
 
   initialize: ( state ) -> State.make state
 
@@ -13,49 +13,56 @@ rulebase = Athena.make
 
   equal: ( a, b ) -> a.equal b
           
-rulebase.conditions
+rules
 
-  "request ready": -> @output.request?
+  .condition
+    name: "request ready"
+    run: -> @output.request?
 
-  "has content": -> @input.content?
+  .condition
+    name: "has content"
+    run: -> @input.content?
 
-  "has content-type": -> ( @input.headers?[ "content-type" ])?
+  .condition
+    name: "has content-type"
+    run: -> ( @input.headers?[ "content-type" ])?
 
-  "has resource": -> @input.request?.resource?
+  .condition
+    name: "has resource"
+    when: [ "request ready" ]
+    run: -> @input.request?.resource?
 
-  "has method": -> @output.request?.method?
+  .condition
+    name: "has method"
+    when: [ "request ready" ]
+    run: -> @output.request?.method?
   
-  "api ready": -> @_.api?
+  .condition
+    name: "api ready"
+    run: -> @_.api?
 
-rulebase.actions
+  .action
+    name: "load api"
+    when: [ "has resource", "!api ready" ]
+    run: -> @_.api ?= await Scout.discover @input.request.resource.origin
 
-  "load api": ->
-    @_.api ?= await Scout.discover @input.request.resource.origin
+  .action
+    name: "set content-type"
+    when: [
+      "has content"
+      "!has content-type" 
+      "has method"
+      "api ready"
+    ]
+    run: ->
+      types = Scout.types [ 
+        @input.request.resource.name
+        @output.request.method
+        "response"
+      ], @_.api
+      @working.headers.set "content-type", types[0]
+      @output.headers = @working.headers.data
 
-  "set content-type": ->
-    types = Scout.types [ 
-      @input.request.resource.name
-      @output.request.method
-      "response"
-    ], @_.api
-    @working.headers.set "content-type", types[0]
-    @output.headers = @working.headers.data
-
-rulebase.rules
-
-  "has resource": [ "request ready" ]
-
-  "load api": [ "has resource", "!api ready" ]
-
-  "has method": [ "request ready" ]
-
-  "set content-type": [
-    "has content"
-    "!has content-type" 
-    "has method"
-    "api ready"
-  ]
-
-export default rulebase
+export default rules
 
 
