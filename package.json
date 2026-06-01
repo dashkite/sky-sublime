@@ -64,7 +64,7 @@
     "@dashkite/athena": "^0.0.4",
     "@dashkite/media-type": "^0.9.0",
     "@dashkite/reactive": "^0.7.22",
-    "@dashkite/scout": "link:../scout",
+    "@dashkite/scout": "^0.8.18",
     "@dashkite/sublime": "link:../sublime"
   }
 }
