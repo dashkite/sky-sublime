@@ -53,7 +53,7 @@
     "@dashkite/genie-clean": "^0.13.22",
     "@dashkite/genie-coffee": "^0.13.25",
     "@dashkite/genie-module": "^0.5.52",
-    "@dashkite/genie-release": "^0.5.12",
+    "@dashkite/genie-release": "^0.5.10",
     "@dashkite/genie-yaml": "^0.11.22",
     "@dashkite/registry": "^0.17.22",
     "@dashkite/runner": "^0.1.21",
