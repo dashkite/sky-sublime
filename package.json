@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/sky-sublime",
-  "version": "0.1.4",
+  "version": "0.1.9",
   "description": "Sublime Request/Response Support For Sky",
   "keywords": [],
   "homepage": "https://github.com/dashkite/sky-sublime#readme",
@@ -46,6 +46,7 @@
     "release": "genie release"
   },
   "devDependencies": {
+
     "@dashkite/amen": "0.9.13",
     "@dashkite/amen-console": "0.8.12",
     "@dashkite/assert": "0.7.18",
@@ -66,5 +67,6 @@
     "@dashkite/reactive": "0.7.19",
     "@dashkite/scout": "link:../scout",
     "@dashkite/sublime": "link:../sublime"
+
   }
 }
