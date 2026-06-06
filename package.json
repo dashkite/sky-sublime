@@ -46,8 +46,7 @@
     "release": "genie release"
   },
   "devDependencies": {
-
-    "@dashkite/amen": "0.9.13",
+    "@dashkite/amen": "0.9.30",
     "@dashkite/amen-console": "0.8.12",
     "@dashkite/assert": "0.7.18",
     "@dashkite/genie": "0.20.14",
@@ -57,16 +56,15 @@
     "@dashkite/genie-release": "0.5.0",
     "@dashkite/genie-yaml": "0.11.13",
     "@dashkite/registry": "0.17.12",
-    "@dashkite/runner": "0.1.8",
+    "@dashkite/runner": "0.1.13",
     "@dashkite/sierra": "0.3.15",
     "express": "5.1.0"
   },
   "dependencies": {
     "@dashkite/athena": "link:../athena",
     "@dashkite/media-type": "0.9.0",
-    "@dashkite/reactive": "0.7.19",
+    "@dashkite/reactive": "0.7.33",
     "@dashkite/scout": "link:../scout",
     "@dashkite/sublime": "link:../sublime"
-
   }
 }
