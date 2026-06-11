@@ -149,7 +149,6 @@
 
     - name: unacceptable response
       input:
-      
         request:
           authorization:
             - challenge:
@@ -160,12 +159,14 @@
             bindings:
               name: dan
           method: put
+          headers:
+            accept: application/vnd.dashkite.greeting+json; version=1
           content:
             greeting: Hello, Dan
+        content: 
+          greeting: Hello, Dan
         headers:
           content-type: application/json
-        content:
-          greeting: Hello, Dan
       rejects: "sublime: unacceptable response"
 
 

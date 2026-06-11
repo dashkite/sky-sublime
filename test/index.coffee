@@ -1,5 +1,5 @@
 import assert from "@dashkite/assert"
-import {test, success} from "@dashkite/amen"
+import {test} from "@dashkite/amen"
 import print from "@dashkite/amen-console"
 import Runner from "@dashkite/runner"
 import express from "express"
@@ -19,15 +19,15 @@ import api from "./api"
 server = ->
   new Promise ( resolve, reject ) ->
     try
-      express()
+      app = express()
         .get "/", ( _, response ) -> response.send api
-        .listen 3000, resolve
+        .listen 3000, -> resolve app
     catch error
       reject error
 
 do ->
 
-  await server()
+  listener = await server()
 
   print await test "Sky Sublime", 
 
@@ -65,4 +65,4 @@ do ->
                 .make input
                 .get()
 
-  process.exit if success then 0 else 1
+  listener?.close()

@@ -50,7 +50,7 @@ rules
     name: "set content-type"
     when: [
       "has content"
-      "!has content-type" 
+      "!has content-type"
       "has method"
       "api ready"
     ]
