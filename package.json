@@ -52,11 +52,11 @@
     "@dashkite/genie": "0.20.14",
     "@dashkite/genie-clean": "0.13.12",
     "@dashkite/genie-coffee": "0.13.15",
-    "@dashkite/genie-module": "^0.5.60",
+    "@dashkite/genie-module": "^0.5.61",
     "@dashkite/genie-release": "0.5.0",
     "@dashkite/genie-yaml": "0.11.13",
     "@dashkite/registry": "0.17.12",
-    "@dashkite/runner": "^0.1.29",
+    "@dashkite/runner": "^0.1.30",
     "@dashkite/sierra": "0.3.15",
     "express": "5.1.0"
   },
@@ -64,7 +64,7 @@
     "@dashkite/athena": "^0.0.18",
     "@dashkite/media-type": "0.9.0",
     "@dashkite/reactive": "0.7.33",
-    "@dashkite/scout": "^0.8.34",
+    "@dashkite/scout": "^0.8.35",
     "@dashkite/sublime": "link:../sublime"
   }
 }
